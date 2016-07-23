@@ -1,8 +1,11 @@
-﻿namespace WpfDiffView.Demo
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+namespace WpfDiffView.Demo
 {
-    public class DemoViewModel
+    public class DemoModel : INotifyPropertyChanged
     {
-        public string Left { get; set; } = @"
+        private string _left = @"
 public Diff Diff
 {
     get;
@@ -26,7 +29,7 @@ internal void Show(Change change)
 }
 ".Trim();
 
-        public string Right { get; set; } = @"
+        private string _right = @"
 public Diff Diff
 {
     get;
@@ -50,5 +53,32 @@ internal void Show(Change change)
     Init(new Diff(a, b));
 }
 ".Trim();
+
+        public string Left
+        {
+            get { return _left; }
+            set
+            {
+                _left = value;
+                RaisePropChanged();
+            }
+        }
+        public string Right
+        {
+            get { return _right; }
+            set
+            {
+                _right = value;
+                RaisePropChanged();
+            }
+        }
+
+        private void RaisePropChanged([CallerMemberName] string propertyName = null)
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
     }
 }

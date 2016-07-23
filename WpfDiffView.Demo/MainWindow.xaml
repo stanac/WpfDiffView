@@ -8,13 +8,28 @@
         mc:Ignorable="d"
         Title="WpfDiffView.Demo" Height="350" Width="525">
     <Window.DataContext>
-        <local:DemoViewModel />
+        <local:DemoModel />
     </Window.DataContext>
     <Window.Resources>
         <local:DebugConverter x:Key="DebugConverter" />
     </Window.Resources>
     <Grid>
-        <wpfDiffView:DiffView x:Name="DiffControl" 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Stretch">
+            <Button Content="Switch"
+                    Margin="20, 0"
+                    Click="Button_Click" />
+            <TextBlock>
+                <Run Text="More info: " />
+                <Hyperlink Click="Hyperlink_Click"
+                           NavigateUri="https://github.com/stanac/WpfDiffView">https://github.com/stanac/WpfDiffView</Hyperlink>
+            </TextBlock>
+        </StackPanel>
+        <wpfDiffView:DiffView Grid.Row="1"
                               LeftText="{Binding Left}"
                               RightText="{Binding Right}" />
     </Grid>
