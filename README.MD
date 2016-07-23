@@ -1,5 +1,7 @@
 # WpfDiffView
-Control extracted from [GitSharp.Demo](https://github.com/henon/GitSharp.Demo)
+WPF Control extracted from [GitSharp.Demo](https://github.com/henon/GitSharp.Demo)
+
+There are room for improvements, please contribute if you are missing something.
 
 ## Sample
 
@@ -10,6 +12,8 @@ Control extracted from [GitSharp.Demo](https://github.com/henon/GitSharp.Demo)
 <wpfDiffView:DiffView LeftText="{Binding Left}"
                       RightText="{Binding Right}" />
 ```
+
+---
 
 ## Install from Nuget
 
