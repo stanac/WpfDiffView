@@ -68,7 +68,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TextToCompare.cs" />
     <Page Include="DiffView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

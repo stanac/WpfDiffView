@@ -117,21 +117,6 @@ namespace WpfDiffView
         }
 
         #region propdp
-
-        //public TextToCompare ComparisonValues
-        //{
-        //    get { return (TextToCompare)GetValue(ComparisonValuesProperty); }
-        //    set { SetValue(ComparisonValuesProperty, value); }
-        //}
-        //public static readonly DependencyProperty ComparisonValuesProperty =
-        //    DependencyProperty.Register("ComparisonValues", typeof(TextToCompare), typeof(DiffView), new PropertyMetadata(TextToCompare.Empty, ComparisonValuesChanged));
-        //public static void ComparisonValuesChanged(DependencyObject depObj, DependencyPropertyChangedEventArgs e)
-        //{
-        //    DiffView dv = (DiffView)depObj;
-        //    dv.Clear();
-        //    var newVal = (TextToCompare)e.NewValue;
-        //    dv.Init(new Diff(newVal?.TextLeft ?? "", newVal?.TextRight ?? ""));
-        //}
         
         public string LeftText
         {
