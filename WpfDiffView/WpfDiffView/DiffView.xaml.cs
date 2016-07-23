@@ -47,7 +47,7 @@ using System.Windows.Media;
 namespace WpfDiffView
 {
     // Control is extracted from: https://github.com/henon/GitSharp.Demo
-    // Altered to support 
+    // Altered: added dependency properties
     public partial class DiffView : UserControl
     {
         public DiffView()
@@ -55,7 +55,7 @@ namespace WpfDiffView
             InitializeComponent();
             DataContext = this;
         }
-
+        
         public void Init(Diff diff)
         {
             Diff = diff;
@@ -115,24 +115,57 @@ namespace WpfDiffView
                 return;
             p.HorizontalAlignment = HorizontalAlignment.Stretch;
         }
+
+        #region propdp
+
+        //public TextToCompare ComparisonValues
+        //{
+        //    get { return (TextToCompare)GetValue(ComparisonValuesProperty); }
+        //    set { SetValue(ComparisonValuesProperty, value); }
+        //}
+        //public static readonly DependencyProperty ComparisonValuesProperty =
+        //    DependencyProperty.Register("ComparisonValues", typeof(TextToCompare), typeof(DiffView), new PropertyMetadata(TextToCompare.Empty, ComparisonValuesChanged));
+        //public static void ComparisonValuesChanged(DependencyObject depObj, DependencyPropertyChangedEventArgs e)
+        //{
+        //    DiffView dv = (DiffView)depObj;
+        //    dv.Clear();
+        //    var newVal = (TextToCompare)e.NewValue;
+        //    dv.Init(new Diff(newVal?.TextLeft ?? "", newVal?.TextRight ?? ""));
+        //}
         
-        public TextToCompare ComparisonValues
+        public string LeftText
         {
-            get { return (TextToCompare)GetValue(ComparisonValuesProperty); }
-            set { SetValue(ComparisonValuesProperty, value); }
+            get { return (string)GetValue(LeftTextProperty); }
+            set { SetValue(LeftTextProperty, value); }
         }
-
-        // Using a DependencyProperty as the backing store for CompararisonValues.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ComparisonValuesProperty =
-            DependencyProperty.Register("ComparisonValues", typeof(TextToCompare), typeof(DiffView), new PropertyMetadata(TextToCompare.Empty, ComparisonValuesChanged));
-
-        public static void ComparisonValuesChanged(DependencyObject depObj, DependencyPropertyChangedEventArgs e)
+        public static readonly DependencyProperty LeftTextProperty =
+            DependencyProperty.Register("LeftText", typeof(string), typeof(DiffView), new FrameworkPropertyMetadata("", FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, LeftChanged));
+        public static void LeftChanged(DependencyObject depObj, DependencyPropertyChangedEventArgs e)
         {
             DiffView dv = (DiffView)depObj;
-            dv.Clear();
-            var newVal = (TextToCompare)e.NewValue;
-            dv.Init(new Diff(newVal?.TextLeft ?? "", newVal?.TextRight ?? ""));
+            var left = (string)e.NewValue ?? "";
+            var right = dv.RightText ?? "";
+            // dv.Clear();
+            dv.Init(new Diff(left, right));
         }
+
+        public string RightText
+        {
+            get { return (string)GetValue(RightTextProperty); }
+            set { SetValue(RightTextProperty, value); }
+        }
+        public static readonly DependencyProperty RightTextProperty =
+            DependencyProperty.Register("RightText", typeof(string), typeof(DiffView), new FrameworkPropertyMetadata("", FrameworkPropertyMetadataOptions.AffectsRender, RightChanged));
+        public static void RightChanged(DependencyObject depObj, DependencyPropertyChangedEventArgs e)
+        {
+            DiffView dv = (DiffView)depObj;
+            var right = (string)e.NewValue ?? "";
+            var left = dv.LeftText ?? "";
+            // dv.Clear();
+            dv.Init(new Diff(left, right));
+        }
+
+        #endregion
 
         internal void Clear()
         {

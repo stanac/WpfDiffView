@@ -24,5 +24,12 @@ namespace WpfDiffView.Demo
         {
             InitializeComponent();
         }
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+            DiffControl.LeftText = new DemoViewModel().Left;
+            DiffControl.RightText = new DemoViewModel().Right;
+        }
     }
 }

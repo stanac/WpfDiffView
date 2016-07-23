@@ -10,9 +10,12 @@
     <Window.DataContext>
         <local:DemoViewModel />
     </Window.DataContext>
+    <Window.Resources>
+        <local:DebugConverter x:Key="DebugConverter" />
+    </Window.Resources>
     <Grid>
-        <wpfDiffView:DiffView 
-            
-            />
+        <wpfDiffView:DiffView x:Name="DiffControl" 
+                              LeftText="{Binding Left}"
+                              RightText="{Binding Right}" />
     </Grid>
 </Window>
