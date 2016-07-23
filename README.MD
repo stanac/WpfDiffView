@@ -1,7 +1,7 @@
 # WpfDiffView
 WPF Control extracted from [GitSharp.Demo](https://github.com/henon/GitSharp.Demo)
 
-There are room for improvements, please contribute if you are missing something.
+There is room for improvements, please contribute if you are missing something.
 
 ## Sample
 
