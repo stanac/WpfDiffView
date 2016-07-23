@@ -53,7 +53,7 @@ namespace WpfDiffView
         public DiffView()
         {
             InitializeComponent();
-            DataContext = this;
+            // DataContext = this;
         }
         
         public void Init(Diff diff)
